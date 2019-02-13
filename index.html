@@ -9,8 +9,7 @@
 <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <a class="navbar-brand" href="#">MyProject</a>
-       
-        <div class="collapse navbar-collapse" id="navbarNav">
+        <div class="collapse navbar-collapse" id="navbar">
           <ul class="navbar-nav">
             <li class="nav-item">
               <a class="nav-link" href="#">History</a>
@@ -21,15 +20,53 @@
 
     <div class="row" id="allTabs">
         <div class="col-2">
-          <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
-            <a class="nav-link active" id="tabFlights" data-toggle="pill" href="#formFlights" role="tab" aria-controls="formFlights" aria-selected="true">Flights</a>
-           
+          <div class="nav flex-column nav-pills" id="all-tabs" role="tablist" aria-orientation="vertical">
+            <a class="nav-link active" id="tab-flights" data-toggle="pill" href="#form-flights" role="tab" aria-controls="form-flights" aria-selected="true">Flights</a>
             
           </div>
         </div>
         <div class="col-10">
-          <div class="tab-content" id="v-pills-tabContent">
-            <div class="tab-pane fade show active" id="formFlights" role="tabpanel" aria-labelledby="tabFlights">...</div>
+          <div class="tab-content" id="all-forms">
+            <div class="tab-pane fade show active" id="form-flights" role="tabpanel" aria-labelledby="tab-flights">
+                    <form>
+
+                            <div class="form-row">
+                                    <div class="form-group col-5">
+                                      <label for="input-start-date">Start date</label>
+                                      <input type="date" class="form-control" id="input-start-date" >
+                                    </div>
+                                    <div class="form-group col-5">
+                                      <label for="input-end-date">End date</label>
+                                      <input type="date" class="form-control" id="input-end-date" >
+                                    </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="input-from-flights">From</label><br>
+                                <select class="custom-select col-10" id="input-from-flights" >
+                                    <option selected>Choose country</option>
+                                    <option value="1">One</option>
+                                    <option value="2">Two</option>
+                                    <option value="3">Three</option>
+                                </select>
+                            </div>
+                          
+                            <div class="form-group">
+                                    <label for="input-to-flights">To</label><br>
+                                    <select class="custom-select col-10" id="input-to-flights" >
+                                        <option selected>Choose country</option>
+                                        <option value="1">One</option>
+                                        <option value="2">Two</option>
+                                        <option value="3">Three</option>
+                                    </select>
+                            </div>
+                            <div class="col-10 d-flex justify-content-end">
+                                <button type="button" class="btn btn-link">Clear</button>
+                                <button type="submit" class="btn btn-primary" disabled>Search</button>
+                                
+                            </div>
+                          </form> 
+            </div>
            
           </div>
         </div>
