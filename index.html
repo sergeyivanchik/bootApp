@@ -13,7 +13,7 @@
     <div class="collapse navbar-collapse" id="navbar">
       <ul class="navbar-nav">
         <li class="nav-item">
-          <a class="nav-link" href="#">History</a>
+          <a class="nav-link" href="history.html" >History</a>
         </li>
       </ul>
     </div>
@@ -34,29 +34,23 @@
             <div class="form-row">
               <div class="form-group col-5">
                 <label for="input-start-date-flights">Start date</label>
-                <input type="date" class="form-control" id="input-start-date-flights" >
+                <input type="date" class="form-control" id="input-start-date-flights" required>
               </div>
               <div class="form-group col-5">
                 <label for="input-end-date-flights">End date</label>
-                <input type="date" class="form-control" id="input-end-date-flights" disabled>
+                <input type="date" class="form-control" id="input-end-date-flights" disabled required>
               </div>
             </div>
             <div class="form-group">
               <label for="select-from-flights">From</label>
-              <select class="form-control col-10" id="select-from-flights" >
-                <option selected>Choose country</option>
-                <option value="1">One</option>
-                <option value="2">Two</option>
-                <option value="3">Three</option>
+              <select class="form-control col-10" id="select-from-flights" required>
+                <option>Choose country</option>
               </select>
             </div>
             <div class="form-group">
               <label for="select-to-flights">To</label>
-              <select class="form-control col-10" id="select-to-flights" >
-                <option selected>Choose country</option>
-                  <option value="1">One</option>
-                  <option value="2">Two</option>
-                  <option value="3">Three</option>
+              <select class="form-control col-10" id="select-to-flights" required>
+                <option>Choose country</option>
               </select>
             </div>
             <div class="col-10 d-flex justify-content-end">
