@@ -12,13 +12,21 @@ countryRequest().then(addCountries);
 function addCountries(data) {
     let fromFlight = document.getElementById('select-from-flights');
     let toFlight = document.getElementById('select-to-flights');
+    let countryHotels = document.getElementById('select-country-hotels');
+    let countryCars = document.getElementById('select-country-cars');
+    let cityHotels = document.getElementById('select-city-hotels');
+    let cityCars = document.getElementById('select-city-cars');
 
     for(let i = 0; i < data.length; i++){
         let option = document.createElement('option');
         option.value = data[i].name;
         option.innerHTML = data[i].name;
         fromFlight.appendChild(option.cloneNode(true));
-        toFlight.appendChild(option);
+        toFlight.appendChild(option.cloneNode(true));
+        countryHotels.appendChild(option.cloneNode(true));
+        countryCars.appendChild(option.cloneNode(true));
+        cityHotels.appendChild(option.cloneNode(true));
+        cityCars.appendChild(option);
     }
 }
 

@@ -66,20 +66,18 @@ addEventListener('click', function (event) {
         for (let i = event.target.innerHTML * countHistoryOnPage - countHistoryOnPage; i < event.target.innerHTML * countHistoryOnPage; i++) {
             showHistory(i);
         }
-        deleteHistory();
-        
+        deleteHistory(); 
     }
 })
 
- function changeDate(date) {
+function changeDate(date) {
     var options = {
         year: 'numeric',
         month: 'short',
         day: 'numeric',
-      };
- 
+    };
     return new Date(date).toLocaleString("en-US", options);
- }
+}
 
 function deleteHistory() {
     for(let i = 0; i < iconsDelete.length; i++) {
