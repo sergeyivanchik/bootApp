@@ -1,6 +1,6 @@
 import './history.scss';
 import 'bootstrap';
-import {getHistory, setHistory} from './storage.js';
+import {getHistory, setHistory, getPage, savePage} from './storage.js';
 
 const historyList = document.getElementById('history-list');
 const historyPages = document.getElementById('history-pages');
@@ -91,46 +91,18 @@ function deleteHistory() {
         historyList.removeChild(document.getElementById(idElement));
         history.splice(idElement,1);
         setHistory(history);
-       /* for (let i = event.target.innerHTML * countHistoryOnPage - countHistoryOnPage; i < event.target.innerHTML * countHistoryOnPage; i++) {
-            showHistory(i);
-        }*/
         while (historyList.firstChild) {
             historyList.firstChild.remove();
         }
         while (historyPages.firstChild) {
             historyPages.firstChild.remove();
         }
-        /*
-        if (history.length % countHistoryOnPage != 0) {
-            countPages = Math.trunc(history.length / countHistoryOnPage) + 1;
-        }
-        else {
-            countPages = Math.trunc(history.length / countHistoryOnPage);
-        }
-        //создание страничек
-        for (let i = 1; i <= countPages; i++) {
-            let li = document.createElement('li');
-            li.setAttribute('class', 'page-item');
-            historyPages.appendChild(li);
-            var a = document.createElement('a');
-            a.setAttribute('class', 'page-link');
-            a.innerHTML = i;
-            li.appendChild(a);
-        }*/
-       // window.historyList.reload();
-       // window.historyPages.reload();
-       /*
-       if(!eventPage) {eventPage--};
-        for (let i = eventPage * countHistoryOnPage - countHistoryOnPage; i < eventPage * countHistoryOnPage; i++) {
-            showHistory(i);
-        }*/
         window.location.reload();
 
     })
  }}
 
  window.onload = function() {
-    
     first();
     var pages = getPage();
     var activePage =  pages[pages.length-1].page;
@@ -139,26 +111,10 @@ function deleteHistory() {
         activePage --;
         localStorage.removeItem('Page');
         savePage(activePage);
-    }
-        
+    }  
     for (let i = activePage * countHistoryOnPage - countHistoryOnPage; i < activePage * countHistoryOnPage; i++) {
         showHistory(i);
     }
     deleteHistory();
  } 
 
- function getPage() {
-    return  JSON.parse(localStorage.getItem('Page'))||[];
-}
-
-function setPage(historyList) {
-    return localStorage.setItem('Page',JSON.stringify(historyList));
-}
-
-function savePage (page) {
-    let historyListPage = getPage();
-    let historyObject = {};
-    historyObject.page = page;  
-    historyListPage.push(historyObject);
-    setPage(historyListPage);
-};

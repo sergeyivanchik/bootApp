@@ -17,5 +17,20 @@ function saveItem (form) {
     setHistory(historyList);
 };
 
-//export default saveItem;
-export {getHistory, setHistory, saveItem,};
+function getPage() {
+    return  JSON.parse(localStorage.getItem('Page'))||[];
+}
+
+function setPage(historyList) {
+    return localStorage.setItem('Page',JSON.stringify(historyList));
+}
+
+function savePage (page) {
+    let historyListPage = getPage();
+    let historyObject = {};
+    historyObject.page = page;  
+    historyListPage.push(historyObject);
+    setPage(historyListPage);
+};
+
+export {getHistory, setHistory, saveItem, setPage, getPage, savePage};

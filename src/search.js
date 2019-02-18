@@ -43,6 +43,7 @@ forms[i].elements[length-1].addEventListener('click', function() {
 }
 
 historyPage.addEventListener('click', function () {
+    localStorage.removeItem('Page');
     function getPage() {
         return  JSON.parse(localStorage.getItem('Page'))||[];
     }
