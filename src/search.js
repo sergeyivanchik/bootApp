@@ -5,6 +5,7 @@ import 'bootstrap';
 
 const forms = document.getElementsByTagName('form');
 const dayInMilliseconds = 24*60*60*1000;
+const historyPage = document.getElementById('history-link');
 
 countryRequest().then(addCountries); 
 
@@ -40,3 +41,19 @@ forms[i].elements[length-1].addEventListener('click', function() {
     saveItem(forms[i]);
     });  
 }
+
+historyPage.addEventListener('click', function () {
+    function getPage() {
+        return  JSON.parse(localStorage.getItem('Page'))||[];
+    }
+    
+    function setPage(historyList) {
+        return localStorage.setItem('Page',JSON.stringify(historyList));
+    }
+
+    let historyListPage = getPage();
+    let historyObject = {};
+    historyObject.page = 1;  
+    historyListPage.push(historyObject);
+    setPage(historyListPage);
+})
