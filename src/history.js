@@ -62,6 +62,7 @@ for (let i = 0; i < countHistoryOnPage; i++) {
 
 addEventListener('click', function (event) {
     if (event.target.classList == 'page-link') {
+        localStorage.removeItem('Page');
         savePage(+event.target.innerHTML);
         while (historyList.firstChild) {
             historyList.firstChild.remove();
@@ -70,6 +71,7 @@ addEventListener('click', function (event) {
             showHistory(i);
         }
         deleteHistory();
+        
     }
 })
  function changeDate(date) {
@@ -128,20 +130,21 @@ function deleteHistory() {
  }}
 
  window.onload = function() {
-    deleteHistory();
+    
     first();
     var pages = getPage();
     var activePage =  pages[pages.length-1].page;
     console.log(historyPages.childNodes[activePage]);
     if(!historyPages.childNodes[activePage]) { 
         activePage --;
+        localStorage.removeItem('Page');
         savePage(activePage);
     }
         
     for (let i = activePage * countHistoryOnPage - countHistoryOnPage; i < activePage * countHistoryOnPage; i++) {
         showHistory(i);
     }
-
+    deleteHistory();
  } 
 
  function getPage() {
