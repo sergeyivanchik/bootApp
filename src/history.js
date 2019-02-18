@@ -1,34 +1,34 @@
 import './history.scss';
 import 'bootstrap';
-import {getHistory, setHistory, getPage, savePage} from './storage.js';
+import {getHistory, setHistory, savePage} from './storage.js';
 
 const historyList = document.getElementById('history-list');
 const historyPages = document.getElementById('history-pages');
 const countHistoryOnPage = 2;
-var history = getHistory();
+var history = getHistory('Key');
 var countPages;
 var iconsDelete = document.getElementsByTagName('i');
 
-function first() {
- 
-//определяем количество страниц для отображение истории
-if (history.length % countHistoryOnPage != 0) {
-    countPages = Math.trunc(history.length / countHistoryOnPage) + 1;
+function loadHistoryPage() {
+    //определяем количество страниц для отображение истории
+    if (history.length % countHistoryOnPage != 0) {
+        countPages = Math.trunc(history.length / countHistoryOnPage) + 1;
+    }
+    else {
+        countPages = Math.trunc(history.length / countHistoryOnPage);
+    }
+    //создание страничек
+    for (let i = 1; i <= countPages; i++) {
+        let li = document.createElement('li');
+        li.setAttribute('class', 'page-item');
+        historyPages.appendChild(li);
+        var a = document.createElement('a');
+        a.setAttribute('class', 'page-link');
+        a.innerHTML = i;
+        li.appendChild(a);
+    }
 }
-else {
-    countPages = Math.trunc(history.length / countHistoryOnPage);
-}
-//создание страничек
-for (let i = 1; i <= countPages; i++) {
-    let li = document.createElement('li');
-    li.setAttribute('class', 'page-item');
-    historyPages.appendChild(li);
-    var a = document.createElement('a');
-    a.setAttribute('class', 'page-link');
-    a.innerHTML = i;
-    li.appendChild(a);
-}
-}
+
 function showHistory(i) {
     if (history[i] != undefined) {
         var li = document.createElement('li');
@@ -55,10 +55,6 @@ function showHistory(i) {
         li.appendChild(buttonDelete);
     }
 }
-/*
-for (let i = 0; i < countHistoryOnPage; i++) {
-    showHistory(i);
-}*/
 
 addEventListener('click', function (event) {
     if (event.target.classList == 'page-link') {
@@ -74,6 +70,7 @@ addEventListener('click', function (event) {
         
     }
 })
+
  function changeDate(date) {
     var options = {
         year: 'numeric',
@@ -85,28 +82,27 @@ addEventListener('click', function (event) {
  }
 
 function deleteHistory() {
- for(let i = 0; i < iconsDelete.length; i++) {
-    iconsDelete[i].addEventListener('click', function() {
-        var idElement = iconsDelete[i].id; 
-        historyList.removeChild(document.getElementById(idElement));
-        history.splice(idElement,1);
-        setHistory(history);
-        while (historyList.firstChild) {
-            historyList.firstChild.remove();
-        }
-        while (historyPages.firstChild) {
-            historyPages.firstChild.remove();
-        }
-        window.location.reload();
+    for(let i = 0; i < iconsDelete.length; i++) {
+        iconsDelete[i].addEventListener('click', function() {
+            var idElement = iconsDelete[i].id; 
+            historyList.removeChild(document.getElementById(idElement));
+            history.splice(idElement,1);
+            setHistory(history,'Key');
+            while (historyList.firstChild) {
+                historyList.firstChild.remove();
+            }
+            while (historyPages.firstChild) {
+                historyPages.firstChild.remove();
+            }
+            window.location.reload();
 
-    })
- }}
+        })
+    }}
 
  window.onload = function() {
-    first();
-    var pages = getPage();
+    loadHistoryPage();
+    var pages = getHistory('Page');
     var activePage =  pages[pages.length-1].page;
-    console.log(historyPages.childNodes[activePage]);
     if(!historyPages.childNodes[activePage]) { 
         activePage --;
         localStorage.removeItem('Page');

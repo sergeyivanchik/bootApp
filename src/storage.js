@@ -1,22 +1,22 @@
-function getHistory() {
-    return  JSON.parse(localStorage.getItem('Key'))||[];
+function getHistory(key) {
+    return  JSON.parse(localStorage.getItem(key))||[];
 }
 
-function setHistory(historyList) {
-    return localStorage.setItem('Key',JSON.stringify(historyList));
+function setHistory(historyList, key) {
+    return localStorage.setItem(key, JSON.stringify(historyList));
 }
 
 function saveItem (form) {
-    let historyList = getHistory();
+    let historyList = getHistory('Key');
     let historyObject = {};
     let length = form.elements.length-2;
     for(let i = 0; i < length; i++) {
         historyObject[form.elements[i].id] = form.elements[i].value;
     }
     historyList.push(historyObject);
-    setHistory(historyList);
+    setHistory(historyList,'Key');
 };
-
+/*
 function getPage() {
     return  JSON.parse(localStorage.getItem('Page'))||[];
 }
@@ -24,13 +24,13 @@ function getPage() {
 function setPage(historyList) {
     return localStorage.setItem('Page',JSON.stringify(historyList));
 }
-
+*/
 function savePage (page) {
-    let historyListPage = getPage();
+    let historyListPage = getHistory('Page');
     let historyObject = {};
     historyObject.page = page;  
     historyListPage.push(historyObject);
-    setPage(historyListPage);
+    setHistory(historyListPage,'Page');
 };
 
-export {getHistory, setHistory, saveItem, setPage, getPage, savePage};
+export {getHistory, setHistory, saveItem, savePage};
